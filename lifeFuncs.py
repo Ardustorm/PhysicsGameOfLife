@@ -26,7 +26,7 @@ def toBaseN(num,base):
     else:
         return toBaseN(num//base,base) + convertString[num%base]
 
-def fromBaseNToM(string,base,position=1):
+def fromBaseNToDec(string,base,position=1):
     #positon keeps track of the (1's, 10's, 100's, etc)
     #position is used internally, the user doesnot see/use it
     #it also can do binary (2's, 4's, 8's,etc)
@@ -34,13 +34,16 @@ def fromBaseNToM(string,base,position=1):
     if len(string)<=1:
         return convertString.find(string[-1])*position
     else:
-        return fromBaseNToM(string[:-1],base,position*base) + \
+        return fromBaseNToDec(string[:-1],base,position*base) + \
             convertString.find(string[-1])*position
+
+"""
 test = input('num  ')
 base = int(input('base '))
 
-print(fromBaseNToM(test,base))
+print(fromBaseNToDec(test,base))
 
     ##1T3
+"""
 
 
