@@ -1,0 +1,37 @@
+
+import numpy as np
+
+def generateArr(total,ones):
+    #
+    #based on code from:
+    #stackoverflow.com/questions/19597473/
+    arr = np.array([1]*ones + [0]*(total-ones))
+    np.random.shuffle(arr)
+    return arr
+
+def arrToNum(arr):
+#converts array to number
+    #Based of of code from here:
+    #stackoverflow.com/questions/489999/
+    num = map(str,arr) #['1','2','3']
+    num = ''.join(num) # '123'
+    num = int(num,2)     #  123
+    return num
+
+def toBaseN(num,base):
+#converts number to a string of base N:
+    convertString= "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if num < base:
+        return convertString[num]  #returns when single digit
+    else:
+        return toBaseN(num//base,base) + convertString[num%base]
+
+def fromBaseNToBinary(string,base):
+    convertString= "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    return convertString.find(string[-1])
+
+test = input('num')
+base = input('base')
+print fromBaseNToBinary(test,base)
+
+    ##1T3
