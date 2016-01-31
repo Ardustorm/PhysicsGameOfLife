@@ -5,6 +5,7 @@
 # /graphics-programming-and-theory/graphics-programming-black-book-r1698
 from lifeFuncs import *
 
+from operator import add
 
 import numpy as np
 
@@ -12,10 +13,11 @@ import numpy as np
     #generateArr(total,ones) returns a 1d array
     #arrToNum(arr) returns the num in base 10
     #toBaseN(num,base)  returns num in new base
-    #fromBaseNToDec(string,base) returns num in base 10    Should make it return array
+    #fromBaseNToDec(string,base) returns # in base10  Should make it return array
     #appendToFile(filePath,first column, second column)
         #mkdir_p(path) checks and creates path if it doesn't exist
-    #
+    #locateNeighbors(cell,height,width) returns location of neighbors
+    #countNeighbors(board,height,width) returns arr w/ # of neighbors @ each cell
 
     
 #Built in function reminders:
@@ -25,19 +27,25 @@ import numpy as np
 ##########
 # Adjustable Variables
 #########
-height = 10
-width  = 20
-numOfOnes = 50
+height = 50
+width  = 50
+numOfOnes = 2400
 maxBase = len(convertString) #~63 Largest base allowed 0-9, a-z, A-Z, _
-wrap = False
+wrap = True
 
+stayAlive = [2,3,]
+born= [3,]
     
+################
+#############
+# SET UP
+##########
+######
 
-
-print('##'*50),
-print('\n')
+print('##'*40),
 
 arr= generateArr(height*width,numOfOnes)
+#print('1D array: {}'.format(arr))
 
 name =toBaseN(arrToNum(arr),maxBase)    #takes array, turns it into max base num
 
@@ -46,15 +54,43 @@ filePath = 'Output/WxH'+str(width)+'x'+str(height) + \
 '_Ones'+ str(numOfOnes)+ '_wrapIs' + str(wrap) + '/'
 name = name+ '.csv'          # Creates file with name
 
-print(name)
-board = arr.reshape((height,width))
+print('filename: {}'.format(name))
+print('\n')
 
+testBoard = [[1, 1, 1, 1, 1, 1],
+             [1, 0, 1, 1, 1, 1],
+             [1, 1, 1, 1, 1, 1],
+             [1, 1, 1, 1, 1, 1],
+             [1, 1, 1, 1, 1, 1],
+             [1, 1, 1, 1, 1, 0]]
+
+#board = np.array(testBoard)
+board =arr.reshape((height,width))
+
+print('Starting Board:\n{}'.format(board))
+print('\n')
+
+######
+##########
+# MAIN LOOP
+#############
+################
 
 i=0
-while i <= 10:
-    appendToFile(filePath,name,i,np.sum(board))
-    i += 1
+while i <= 1:
+    #appendToFile(filePath,name,i,np.sum(board))
+    neighborsArr=countNeighbors(board,height,width)
+    print('Neighbors:\n{}'.format(neighborsArr))
+
+ 
     
+    i += 10
+
+
+#print(neighbors)          
+
+print('\n'*2)
+print('number of neighbors each cell has:')
 print (board)
 print(np.sum(board))
 
