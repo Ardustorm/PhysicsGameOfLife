@@ -1,0 +1,8 @@
+
+Here is how you can skip n lines:
+     plot "foo.dat" every ::n using 1:2 with lines
+
+How to plot multiple files:
+    filelist=system("ls *.csv")
+    plot for [filename in filelist] filename every ::1 using 1:2
+

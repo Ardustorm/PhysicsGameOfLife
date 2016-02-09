@@ -16,12 +16,12 @@ def mkdir_p(path):
         else:
             raise
 
+        
 def appendToFile(filePath,name,a,b):
-    mkdir_p(filePath)
+    #mkdir_p(filePath) #Not needed if called earlier in function i believe
     testFile = open(filePath+name,'a')
     testFile.write('{}, {}\n'.format(a,b))
     testFile.close()
-
 
 
 def generateArr(total,ones):
@@ -32,6 +32,7 @@ def generateArr(total,ones):
     np.random.shuffle(arr)
     return arr
 
+
 def arrToNum(arr):
 #converts array to number
     #Based of of code from here:
@@ -41,6 +42,7 @@ def arrToNum(arr):
     num = int(num,2)     #  123
     return num
 
+
 def toBaseN(num,base):
 #converts number to a string of base N:
     if num < base:
@@ -48,6 +50,7 @@ def toBaseN(num,base):
     else:
         return toBaseN(num//base,base) + convertString[num%base]
 
+    
 def fromBaseNToDec(string,base,position=1):
     #positon keeps track of the (1's, 10's, 100's, etc)
     #position is used internally, the user doesnot see/use it
@@ -57,8 +60,7 @@ def fromBaseNToDec(string,base,position=1):
     else:
         return fromBaseNToDec(string[:-1],base,position*base) + \
             convertString.find(string[-1])*position
-
-
+    
 
 def locateNeighbors(cell,height,width):
     
@@ -125,3 +127,13 @@ def countNeighbors(board,height,width):
 
             board[cell]=totalNeighbors #sets board to represent neighbors
     return board
+
+
+def nextFileName(path):
+    #stackoverflow.com/questions/2401235
+    num = 1
+    while True:
+        file_name = 'file%d.txt' % num
+        if not os.path.exists(path+file_name):
+            return file_name
+        num += 1
