@@ -30,11 +30,11 @@ import numpy as np
 # Adjustable Variables
 #########
 create_file = True
-generations = 1000
+generations = 50
 num_of_simulations = 1
-height = 100
-width  = 100
-numOfOnes = 5000
+height = 10
+width  = 10
+numOfOnes = 50
 maxBase = len(convertString) #~63 Largest base allowed 0-9, a-z, A-Z, _
 wrap = True
 #Rules : conwaylife.com/wiki/Cellular_automaton#Rules
@@ -72,7 +72,8 @@ for x in range(num_of_simulations):
 
     #Will create folders for different test cases
     if create_file:
-        filePath ='Output/WxH{}x{}_{}Ones_WrapIs_{}_{}gens_stayAlive{}_born{}/'.format(width,height,numOfOnes,wrap,generations,stayAlive,born)
+        filePath ='Output/WxH{}x{}_{}Ones_WrapIs_{}_{}gens_stayAlive{}_born{}/'.format(
+            width,height,numOfOnes,wrap,generations,str(stayAlive).replace(' ','').strip('[]'),str(born).replace(' ','').strip('[]'))
 
         #makes directory if needed
         mkdir_p(filePath)
