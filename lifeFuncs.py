@@ -129,11 +129,38 @@ def countNeighbors(board,height,width):
     return board
 
 
-def nextFileName(path):
+def nextFileNameFunc(path):
     #stackoverflow.com/questions/2401235
     num = 1
+
     while True:
-        file_name = 'file%d.txt' % num
+        file_name = 'game{}.csv'.format(num)
         if not os.path.exists(path+file_name):
             return file_name
         num += 1
+
+
+      
+def nextGeneration(board,neighborArr,stayAlive,born):
+    # Goes through board array and checks neighbor array against the stay Alive
+    # values. Then checks the dead cells to see if they come alive
+
+    
+    #https://docs.scipy.org/doc/numpy/reference/arrays.nditer.html
+    current_cell = np.nditer(board, flags=['multi_index'])
+    while not current_cell.finished:      # Wait till it goes through it all,
+
+
+        if(current_cell[0] == 1 and (neighborArr[current_cell.multi_index] in stayAlive)):
+           #print('it stays alive')
+            board[current_cell.multi_index]=1
+        elif(current_cell[0]==1 and (neighborArr[current_cell.multi_index] not in stayAlive)):
+            #rint('its dead')
+            board[current_cell.multi_index]=0
+        elif(current_cell[0] == 0 and (neighborArr[current_cell.multi_index] in born)):
+            board[current_cell.multi_index]=1
+           #print('Its born')
+
+             
+        current_cell.iternext()
+    return board
